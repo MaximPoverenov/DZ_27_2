@@ -9,6 +9,7 @@ NULLABLE = {"null": True, "blank": True}  # Необязательное пол�
 class Course(models.Model):
     owner = models.ForeignKey(
         "users.User",
+        **NULLABLE,
         on_delete=models.CASCADE,
         verbose_name="Владелец курса",
         related_name="courses",
@@ -65,7 +66,10 @@ class Lesson(models.Model):
         help_text="Укажите видео",
     )
     course = models.ForeignKey(
-        Course, on_delete=models.CASCADE, verbose_name="Курс", help_text="Выберите курс"
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="Курс",
+        help_text="Выберите курс",  # , related_name="lessons"
     )
 
     def __str__(self):
